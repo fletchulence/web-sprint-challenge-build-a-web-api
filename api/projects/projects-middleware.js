@@ -20,16 +20,27 @@ function checkComplete (req, res, next){
    // const {id} = req.params
    // const completed = Project.get( id ) 
    if ( req.body.completed === undefined ){
-      next({ status: 400, message: 'please reply "YES" to completed field'})
+      next({ status: 400, message: 'please reply "YES/NO" to completed field'})
    } else {
       req.completed = req.body.completed
+      if ( 
+         req.body.completed === 'yes' || 
+         req.body.completed === 'YES' || 
+         req.body.completed === 'y' || 
+         req.body.completed === 'T' || 
+         req.body.completed === 'TRUE' || 
+         req.body.completed === 't' || 
+         req.body.completed === 'true' || 
+         req.body.completed === true || 
+         req.body.completed === 'Y' 
+         ){
+         req.completed = true
+      } 
       next()
-
-      // next()
    }
 }
 
-// checking for id to exist in the db
+// checking for id to exist in the db => [if not] to 404
 async function idExists (req, res, next) {
    const {id} = req.params;
    const dbId = await Project.get(id)
