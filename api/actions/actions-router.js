@@ -9,33 +9,33 @@ const {
    checkComplete,
 } = require('./actions-middlware')
 
-router.get('/', async (req, res, next)=>{
-   try{
+router.get('/', async (req, res, next) => {
+   try {
       res.json(await Action.get())
-   } catch(err){
+   } catch (err) {
       next(err)
    }
 })
 
-router.get('/:id', idExists, async (req, res, next)=>{
-   try{
-      res.json( req.id )
-   } catch(err){
+router.get('/:id', idExists, async (req, res, next) => {
+   try {
+      res.json(req.id)
+   } catch (err) {
       next(err)
    }
 });
 
-router.post('/', checkBody, async (req, res, next)=>{
-   const newAction = await Action.insert( req.body )
-   try{
+router.post('/', checkBody, async (req, res, next) => {
+   const newAction = await Action.insert(req.body)
+   try {
       res.json(newAction)
-   } catch(err){
+   } catch (err) {
       next(err)
    }
 })
 
-router.put('/:id', idExists, checkBody, checkComplete, async(req, res, next)=>{
-   let changes = { ...req.body, completed: req.body.completed}
+router.put('/:id', idExists, checkBody, checkComplete, async (req, res, next) => {
+   let changes = { ...req.body, completed: req.body.completed }
    const updateAction = await Action.update(req.params.id, changes)
    try {
       res.json(updateAction)
@@ -44,10 +44,10 @@ router.put('/:id', idExists, checkBody, checkComplete, async(req, res, next)=>{
    }
 });
 
-router.delete('/:id', idExists, async (req, res, next)=>{
-   try{
-      res.json (await Action.remove( req.params.id ))
-   } catch(err){
+router.delete('/:id', idExists, async (req, res, next) => {
+   try {
+      res.json(await Action.remove(req.params.id))
+   } catch (err) {
       next(err)
    }
 });
