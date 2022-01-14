@@ -20,7 +20,7 @@ function checkComplete(req, res, next) {
    // const {id} = req.params
    // const completed = Project.get( id ) 
    if (req.body.completed === undefined) {
-      next({ status: 400, message: 'please reply "YES/NO" to completed field' })
+      next({ status: 400, message: "please reply 'YES'/'NO' to completed field" })
    } else {
       req.completed = req.body.completed
       if (
