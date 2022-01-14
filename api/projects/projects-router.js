@@ -58,4 +58,13 @@ router.delete('/:id', idExists, (req, res, next)=>{
    }
 });
 
+// [GET] returns actions per project id
+router.get('/:id/actions', idExists, async (req, res, next)=>{
+   try {
+      res.json( await Project.getProjectActions( req.id ))
+   } catch(err){
+      next(err)
+   }
+})
+
 module.exports = router;
