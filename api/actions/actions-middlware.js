@@ -7,7 +7,7 @@ module.exports = {
 }
 
 function checkBody (req, res, next) {
-   if ( !req.body.name || !req.body.description ){
+   if ( !req.body.notes || !req.body.description || !req.body.project_id ){
       next({ status: 400, message: 'cant happen' })
    } else {
       next()
