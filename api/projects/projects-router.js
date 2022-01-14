@@ -27,10 +27,13 @@ router.get('/:id', idExists, async (req, res, next) =>{
 });
 
 // [POST] 
-router.post('/', checkBody, (req, res, next)=>{
+router.post('/', checkBody, async (req, res, next)=>{
+   const newProject = await Project.insert( req.body )
    try{
-
-   } catch()
+      res.json( newProject )
+   } catch(err){
+      next(err)
+   }
 })
 
 module.exports = router;

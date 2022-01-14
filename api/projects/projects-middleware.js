@@ -8,14 +8,10 @@ module.exports = {
 
 // checking for paload to have a req.body -- used for initial check on post/update
 function checkBody (req, res, next) {
-   try{
-      if (!req.body){
-         next({ status: 404 })
-      } else{
-         next()
-      }
-   } catch(err){
-      next(err)
+   if ( !req.body.name || !req.body.description ){
+      next({ status: 400, message: 'cant happen' })
+   } else {
+      next()
    }
 }
 
@@ -32,4 +28,4 @@ async function idExists (req, res, next) {
    } catch(err){
       next(err)
    }
-};
+}
