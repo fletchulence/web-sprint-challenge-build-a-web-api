@@ -3,10 +3,11 @@ const Project = require('./projects-model')
 
 module.exports = {
    checkBody,
-   // idExists,
+   idExists,
 }
 
-function checkBody(req, res, next){
+// checking for paload to have a req.body -- used for initial check on post/update
+function checkBody (req, res, next) {
    try{
       if (!req.body){
          next({ status: 404 })
@@ -18,14 +19,17 @@ function checkBody(req, res, next){
    }
 }
 
-// async function(req, res, next){
-//    const {id} = req.params;
-//    const dbId = await Project.get(id)
-//    try{
-//       if (!dbId){
-//          next()
-//       }
-//    } catch(err){
-//       next(err)
-//    }
-// }
+// checking for id to exist in the db
+async function idExists (req, res, next) {
+   const {id} = req.params;
+   const dbId = await Project.get(id)
+   try{
+      if (!dbId){
+         next({ status: 404 , message: 'this id is not found in our records' }) // maybe add a message?
+      } else{
+         next()
+      }
+   } catch(err){
+      next(err)
+   }
+};

@@ -3,7 +3,8 @@ const router = require('express').Router();
 const Project = require('./projects-model')
 
 const {
-   checkBody
+   checkBody,
+   idExists,
 } = require('./projects-middleware')
 
 // [GET] all projects
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) =>{
 });
 
 // [GET] by id -- need midd for if id DNE
-router.get('/:id', async (req, res, next) =>{
+router.get('/:id', idExists, async (req, res, next) =>{
    const {id} = req.params
    try{
       res.json(await Project.get(id))
@@ -26,8 +27,10 @@ router.get('/:id', async (req, res, next) =>{
 });
 
 // [POST] 
-router.post('/', (req, res, next)=>{
-   
+router.post('/', checkBody, (req, res, next)=>{
+   try{
+
+   } catch()
 })
 
 module.exports = router;
