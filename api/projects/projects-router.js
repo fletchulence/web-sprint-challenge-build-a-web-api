@@ -50,9 +50,9 @@ router.put('/:id', idExists, checkBody, checkComplete, async (req, res, next) =>
 });
 
 // this test is not correct...
-router.delete('/:id', idExists, (req, res, next)=>{
+router.delete('/:id', idExists, async (req, res, next)=>{
    try{
-      Project.remove( req.id )
+      res.json (await Project.remove( req.id ))
    } catch(err){
       next(err)
    }
