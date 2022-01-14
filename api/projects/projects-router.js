@@ -19,7 +19,6 @@ router.get('/', async (req, res, next) => {
 
 // [GET] by id -- need midd for if id DNE
 router.get('/:id', idExists, async (req, res, next) => {
-   // const {id} = req.params
    try {
       res.json(req.id)
    } catch (err) {
@@ -39,7 +38,6 @@ router.post('/', checkBody, async (req, res, next) => {
 
 // [PUT] updating the post based on the id
 router.put('/:id', idExists, checkBody, checkComplete, async (req, res, next) => {
-   // const {id}
    let changes = { ...req.body, completed: req.completed };
    const updateProject = await Project.update(req.params.id, changes)
    try {
