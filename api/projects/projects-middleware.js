@@ -48,7 +48,7 @@ async function idExists (req, res, next) {
       if (!dbId){
          next({ status: 404 , message: 'this id is not found in our records' }) // maybe add a message?
       } else{
-         req.id = id
+         req.id = dbId
          next()
       }
    } catch(err){
