@@ -20,7 +20,7 @@ server.get('*', (req, res, next)=>{
 
 // ERRORS - default to 404 so i dont have to set a message
 server.use((err, req, res, next) => { // eslint-disable-line
-   res.status(404).json({
+   res.status( err.status || 500).json({
      message: err.message,
      stack: err.stack,
    });
