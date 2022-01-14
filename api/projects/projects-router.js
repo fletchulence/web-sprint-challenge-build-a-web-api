@@ -49,7 +49,7 @@ router.put('/:id', idExists, checkBody, checkComplete, async (req, res, next) =>
    }
 });
 
-// this test is not correct...
+//! this test is not correct... if we are going by README
 router.delete('/:id', idExists, async (req, res, next)=>{
    try{
       res.json (await Project.remove( req.id ))
