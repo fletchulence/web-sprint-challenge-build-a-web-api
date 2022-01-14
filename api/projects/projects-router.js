@@ -40,13 +40,22 @@ router.post('/', checkBody, async (req, res, next) => {
 // [PUT] updating the post based on the id
 router.put('/:id', idExists, checkBody, checkComplete, async (req, res, next) => {
    // const {id}
-   let changes = { ...req.body, completed: req.body.completed };
+   let changes = { ...req.body, completed: req.completed };
    const updateProject = await Project.update(req.id, changes)
    try {
       res.json(updateProject)
    } catch (err) {
       next(err)
    }
-})
+});
+
+// this test is not correct...
+router.delete('/:id', idExists, (req, res, next)=>{
+   try{
+      Project.remove( req.id )
+   } catch(err){
+      next(err)
+   }
+});
 
 module.exports = router;
